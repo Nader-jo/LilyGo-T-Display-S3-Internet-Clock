@@ -7,8 +7,6 @@
 #include "version.h"
 #include <HTTPUpdate.h>
 
-#define BUTTON_PIN_0 0
-#define BUTTON_PIN_14 14
 bool isCancel = false;
 
 void performOTAUpdate(String firmware_url)
@@ -152,9 +150,9 @@ void checkForUpdate()
             lv_obj_add_state(ui_Button1, LV_STATE_CHECKED); /// States
             isCancel = true;
             lv_handler();
-            while (digitalRead(BUTTON_PIN_0) == HIGH)
+            while (digitalRead(PIN_BUTTON_1) == HIGH)
             {
-                if (digitalRead(BUTTON_PIN_14) == LOW)
+                if (digitalRead(PIN_BUTTON_2) == LOW)
                 {
                     isCancel = !isCancel;
                     Serial.printf("isCancel: %s\n", isCancel ? "true" : "false");
@@ -181,7 +179,7 @@ void checkForUpdate()
             lv_label_set_text(ui_Label5, "Ok");
             lv_handler();
 
-            while (digitalRead(BUTTON_PIN_0) != HIGH)
+            while (digitalRead(PIN_BUTTON_1) != HIGH)
                 ;
             lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_HIDDEN);
             lv_obj_set_x(ui_Button2, 60);
@@ -202,7 +200,7 @@ void checkForUpdate()
         lv_obj_set_x(ui_Button2, 0);
         lv_label_set_text(ui_Label5, "Ok"); // ui_Bar2
         lv_handler();
-        while (digitalRead(BUTTON_PIN_0) != HIGH)
+        while (digitalRead(PIN_BUTTON_1) != HIGH)
             ;
         lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_HIDDEN);
         lv_obj_set_x(ui_Button2, 60);
