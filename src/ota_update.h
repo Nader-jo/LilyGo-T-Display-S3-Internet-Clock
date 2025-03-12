@@ -13,6 +13,7 @@ void performOTAUpdate(String firmware_url)
 {
     if (isCancel)
     {
+        Serial.println("Update cancelled!");
         lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_HIDDEN);
         lv_obj_set_x(ui_Button2, 60);
         lv_label_set_text(ui_Label5, "Update");
@@ -147,7 +148,7 @@ void checkForUpdate()
         {
             lv_obj_clear_flag(ui_Panel4, LV_OBJ_FLAG_HIDDEN);
             lv_label_set_text(ui_Label3, "New update found!");
-            lv_obj_add_state(ui_Button1, LV_STATE_CHECKED); /// States
+            lv_obj_add_state(ui_Button1, LV_STATE_PRESSED); /// States
             isCancel = true;
             lv_handler();
             while (digitalRead(PIN_BUTTON_1) == HIGH)
@@ -158,14 +159,18 @@ void checkForUpdate()
                     Serial.printf("isCancel: %s\n", isCancel ? "true" : "false");
                     if (isCancel)
                     {
-                        lv_obj_add_state(ui_Button1, LV_STATE_CHECKED);   /// States
-                        lv_obj_clear_state(ui_Button2, LV_STATE_CHECKED); /// States
+                        lv_obj_add_state(ui_Button1, LV_STATE_PRESSED);   /// States
+                        lv_obj_clear_state(ui_Button2, LV_STATE_PRESSED); /// States
+                        Serial.println("Button1 Checked");
                     }
                     else
                     {
-                        lv_obj_clear_state(ui_Button1, LV_STATE_CHECKED); /// States
-                        lv_obj_add_state(ui_Button2, LV_STATE_CHECKED);   /// States
+                        lv_obj_clear_state(ui_Button1, LV_STATE_PRESSED); /// States
+                        lv_obj_add_state(ui_Button2, LV_STATE_PRESSED);   /// States
+                        Serial.println("Button2 Checked");
                     }
+                    lv_handler();
+                    delay(500);
                 }
             }
             performOTAUpdate(firmware_url);
