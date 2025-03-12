@@ -28,7 +28,7 @@ jobs:
         run: pio run
 
       - name: Upload firmware to artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: ./.pio/build/lilygo-t-display-s3/firmware.bin
