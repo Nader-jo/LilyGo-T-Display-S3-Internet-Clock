@@ -26,3 +26,9 @@ jobs:
 
       - name: Build PlatformIO Project
         run: pio run
+
+      - name: Upload firmware to artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: firmware
+          path: ./.pio/build/lilygo-t-display-s3/firmware.bin
