@@ -137,8 +137,8 @@ void checkForUpdate()
             return;
         }
 
-        String latest_version = doc["latest_version"];
-        String firmware_url = doc["firmware_url"];
+        String latest_version = doc["tag_name"];
+        String firmware_url = doc["assets"][0]["browser_download_url"];
 
         Serial.printf("Current version: %s\n", FIRMWARE_VERSION);
         Serial.printf("Latest version: %s\n", latest_version.c_str());
