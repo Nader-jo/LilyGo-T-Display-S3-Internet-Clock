@@ -147,7 +147,7 @@ void checkForUpdate()
         if (latest_version != FIRMWARE_VERSION)
         {
             lv_obj_clear_flag(ui_Panel4, LV_OBJ_FLAG_HIDDEN);
-            lv_label_set_text(ui_Label3, "New update found!");
+            lv_label_set_text(ui_Label3, String("New update found: " + latest_version).c_str());
             lv_obj_add_state(ui_Button1, LV_STATE_PRESSED); /// States
             isCancel = true;
             lv_handler();
